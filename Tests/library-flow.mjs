@@ -40,7 +40,7 @@ const sandbox={console,Blob,Date,crypto:{randomUUID},wavHeader,
   AudioContext:class{constructor(){this.state='running';this.sampleRate=48000;this.audioWorklet={addModule:async()=>{}};}createMediaStreamSource(){return{connect(){},disconnect(){}};}createGain(){return{gain:{value:1},connect(){},disconnect(){}};}resume(){return Promise.resolve();}close(){return Promise.resolve();}},
   AudioWorkletNode:class{constructor(){node=this;this.port={postMessage:()=>Promise.resolve().then(()=>this.port.onmessage({data:{type:'stopped'}}))};}connect(){}disconnect(){}},
   URL:{revokeObjectURL(){},createObjectURL:()=> 'blob:test'},performance:{now:()=>0},confirm:()=>{confirmCalls++;return false;},setInterval:()=>1,clearInterval(){},setTimeout,clearTimeout};
-vm.runInNewContext(fs.readFileSync(new URL('../web/app.js',import.meta.url),'utf8').replace(/^import .*;\n/gm,''),sandbox);
+vm.runInNewContext(fs.readFileSync(new URL('../web/app.js',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,''),sandbox);
 async function finishTake(){node.port.onmessage({data:{type:'pcm',buffer:new ArrayBuffer(8192),frames:4096,peak:.04,missing:0}});await get('stop').onclick();}
 await get('record').onclick();await finishTake();
 assert.equal(stored.size,1);assert.equal(get('stateText').textContent,'已保存到录音库');

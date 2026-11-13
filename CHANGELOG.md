@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.0.1 — 2026-11-13
+
+### Fixed
+
+- Make the library test harness accept both Windows CRLF and Unix LF source files.
+- Specify source line endings so cross-platform checkouts build consistently.
+
+The application runtime and standalone HTML are unchanged from v1.0.0.
+
 ## v1.0.0 — 2026-11-13
 
 Initial open-source release of Vibe Recorder / Vibe 录音库.
