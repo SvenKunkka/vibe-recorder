@@ -1,0 +1,23 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+node_modules/
+dist/
+outputs/
+web/_test/
+.env
+.env.*
+*.log
+
+# Recordings and local databases are never project source.
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.ogg
+*.flac
+*.webm
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite-*

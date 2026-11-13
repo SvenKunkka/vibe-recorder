@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Vibe 录音库 · 自用版</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header><div class="brand"><span class="logo" aria-hidden="true">▥</span><span>Vibe 录音库</span></div><span class="local"><i></i>自用版 · 保存在本机</span></header>
+    <section class="intro"><h1>录下一段，留住每一段。</h1><p>停止后自动保存，在同一页面回听之前的录音，接着录下一段。</p></section>
+    <section class="recorder" aria-label="录音控制">
+      <div class="device-row"><div class="device-field"><label>实际录音输入</label><strong id="actualInput" class="current-input pending" aria-live="polite">尚未连接</strong></div><button id="authorize" class="secondary">允许麦克风</button></div>
+      <div id="connection" class="connection" hidden><span>已连接，可直接开始录音</span><button id="disconnect" class="secondary">断开麦克风</button></div>
+      <div id="notice" class="notice" role="status" aria-live="polite">在系统设置里选好录音设备，点击开始录音并允许麦克风即可。</div>
+      <p class="device-help">按默认输入录音，网页不再选择设备。若实际名称不符，请检查浏览器默认麦克风；切换后点击「重新连接」。</p>
+      <div class="tape">
+        <div class="tape-top"><span class="state" id="state"><i></i><span id="stateText">准备录音</span></span><span class="format">WAV / 16 位 PCM</span></div>
+        <div id="clock" class="clock" aria-label="录音时间">00:00<span>.0</span></div>
+        <div class="wave-wrap"><canvas id="wave" aria-label="声音波形，录制后可点击定位回放"></canvas><span id="emptyWave">声音波形会出现在这里</span></div>
+        <div class="scale"><span>00:00</span><span id="level">输入电平 —</span><span id="duration">00:00</span></div>
+      </div>
+      <div class="transport"><button id="record" class="primary"><span class="record-dot"></span><span id="recordText">开始录音</span></button><button id="stop" class="stop" disabled><span class="stop-square"></span>停止并生成 WAV</button><span id="technical">保留停顿，不自动裁剪</span></div>
+      <div id="error" class="error" role="alert" hidden></div>
+    </section>
+    <section class="result" id="result" hidden aria-label="回放录音">
+      <div class="result-head"><div><h2 id="resultTitle">回听这段录音</h2><p id="fileInfo"></p></div><a id="download" class="download" download>下载 WAV <span aria-hidden="true">↓</span></a></div>
+      <audio id="player" controls preload="metadata"></audio>
+      <p class="replay-tip">拖动播放进度，或点击上方波形，定位到需要核对的时间。</p>
+      <button id="retrySave" class="secondary retry-save" hidden>重试保存到录音库</button>
+    </section>
+    <section class="library" aria-label="录音库"><div class="library-head"><div><h2>我的录音</h2><p id="libraryStatus" aria-live="polite">正在读取录音库…</p></div><button id="libraryRefresh" class="secondary">刷新录音库</button></div><p id="libraryError" class="error" role="alert" hidden></p><div id="libraryEmpty" class="library-empty">录完第一段后，会自动保存在这里。</div><div id="libraryList"></div><p class="library-note">录音保存在当前浏览器中。刷新或重新打开同一页面后仍可回听；清除浏览器数据会清空录音库。重要录音可以另行下载 WAV 保存。</p></section>
+    <section class="guide"><h2>录音与回听</h2><ol><li><span>开始录音</span>系统里选好设备，允许麦克风即可。</li><li><span>停止保存</span>自动加入录音库，可直接录下一段。</li><li><span>点击回听</span>从下方选择任意一段历史录音。</li></ol><p>建议每段控制在 10 分钟内；最长录制 30 分钟。正在录制时请勿关闭页面，停止并显示保存成功后再关闭。</p></section>
+    <footer><span>Chrome / Edge · Mac / Windows</span><span>自用录音库 · 不上传，不转写</span></footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
